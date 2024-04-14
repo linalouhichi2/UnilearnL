@@ -1,0 +1,29 @@
+{% extends 'ClientBase.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+      <a href="{{ path('Client_avis_list', {'user_id': user_id}) }}" class="btn btn-primary">My Reviews</a>
+<br>
+        <div class="row">
+            {% for formation in formations %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ formation.nomFormation }}</h5>
+                            <p class="card-text">{{ formation.description }}</p>
+                            <p class="card-text">Start Date: {{ formation.dateDebut ? formation.dateDebut|date('Y-m-d') : 'N/A' }}</p>
+                            <p class="card-text">End Date: {{ formation.dateFin ? formation.dateFin|date('Y-m-d') : 'N/A' }}</p>
+                            <p class="card-text">Price: ${{ formation.prix }}</p>
+                            
+                                <a href="{{ path('app_avis_index', {'idFormation': formation.idFormation , 'user_id': user_id}) }}" class="btn btn-primary">Reviews</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <p>No records found.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

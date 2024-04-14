@@ -1,0 +1,36 @@
+{% extends 'Clientbase.html.twig' %}
+
+
+{% block body %}
+    <h1>Avis index</h1>
+
+<a  class="btn btn-primary btn-user btn-block" href="{{ path('app_avis_new', { 'user_id': user_id , 'idFormation': idFormation }) }}">Create new</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Rate</th>
+                <th>Commentaire</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for avi in avis %}
+            <tr>
+                <td>{{ avi.rate }} /10</td>
+                <td>{{ avi.commentaire }}</td>
+                <td>{{ avi.date ? avi.date|date('Y-m-d H:i:s') : '' }}</td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+         <a href="{{ path('Client_formation_index', {'user_id': user_id}) }}" class="btn btn-primary btn-user btn-block">
+    Back to list
+</a>
+    </table>
+
+{% endblock %}
